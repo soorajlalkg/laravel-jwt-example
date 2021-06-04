@@ -4,9 +4,12 @@ namespace App\Exceptions;
 
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Throwable;
+use App\Http\Traits\ResponseTrait;
 
 class Handler extends ExceptionHandler
 {
+    use ResponseTrait; 
+
     /**
      * A list of the exception types that are not reported.
      *
@@ -37,5 +40,17 @@ class Handler extends ExceptionHandler
         $this->reportable(function (Throwable $e) {
             //
         });
+    }
+
+    /**
+     * Render an exception into an HTTP response.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \Throwable  $exception
+     * @return \Illuminate\Http\Response
+     */
+    public function render($request, Throwable $exception)
+    {
+        return $this->error(401, [], 'unauthorized');
     }
 }
