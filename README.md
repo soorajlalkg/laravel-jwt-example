@@ -1,4 +1,4 @@
-# [Laravel Sanctum Token App]
+# [Laravel JWT Token App]
 
 
 # Getting started
